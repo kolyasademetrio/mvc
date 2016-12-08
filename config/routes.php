@@ -2,12 +2,11 @@
 
 return array(
 
-	// news/sport/124
+	'product/([0-9]+)' => 'product/view/$1',
 
-	'news/([0-9]+)' => 'news/view/$1',
-	'news' => 'news/index', // actionIndex in NewsController
-	//'news/([0-9]+)' => 'news/view', // actionView in NewsController
-	
-	//'products' => 'product/list', // actionList in ProductController
+	'catalog' => 'catalog/index', // CatalogController - actionIndex
+	'category/([0-9]+)' => 'catalog/category/$1', //CatalogController - actionCategory
+
+	'' => 'site/index',
 
 );

@@ -1,10 +1,16 @@
-<?php 
+<?php
+
+include_once ROOT . '/models/Category.php';
 
 class ProductController
 {
-	public function actionList ()
+	public function actionView ($id)
 	{
-		echo 'ProductController - actionList';
+		$categories = array();
+		$categories = Category::getCategoriesList();
+
+
+		include_once (ROOT . '/views/product/view.php');
 
 		return true;
 	}
