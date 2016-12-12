@@ -3,7 +3,7 @@
 class Product
 {
 	// Количество отображаемых товаров по умолчанию
-    const SHOW_BY_DEFAULT = 6;
+    const SHOW_BY_DEFAULT = 3;
 
     /**
      * Возвращает массив последних товаров
@@ -44,30 +44,6 @@ class Product
         return $productsList;
     }
 
-   // public static function getProductsListByCategory($categoryId = false)
-   // {
-   //      if ($categoryId) {
-   //          $db = Db::getConnection();
-
-   //          $sql = "SELECT id, name, price, is_new FROM product WHERE status='1' AND category_id='$categoryId' ORDER BY id DESC LIMIT self::SHOW_BY_DEFAULT";
-
-   //          $result = $db->query($sql);
-
-   //          $products = array();
-
-   //          $i = 0;
-   //          while ($row = $result->fetch()) {
-   //              $products[$i]['id'] = $row['id'];
-   //              $products[$i]['name'] = $row['name'];
-   //              $products[$i]['price'] = $row['price'];
-   //              $products[$i]['is_new'] = $row['is_new'];
-   //              $i++;
-   //          }
-
-   //          return $products;
-   //      }
-   // }
-
      /**
      * Возвращает список товаров в указанной категории
      * @param type $categoryId <p>id категории</p>
@@ -94,7 +70,7 @@ class Product
         $result->bindParam(':limit', $limit, PDO::PARAM_INT);
         $result->bindParam(':offset', $offset, PDO::PARAM_INT);
 
-        // Выполнение коменды
+        // Выполнение команды
         $result->execute();
 
         // Получение и возврат результатов
@@ -108,6 +84,23 @@ class Product
             $i++;
         }
         return $products;
+    }
+
+    public static function getProductById($id)
+    {
+        $db = Db::getConnection();
+
+        $sql = "SELECT * FROM product WHERE id = :id";
+
+        $result = $db->prepare($sql);
+
+        $result->bindParam(':id', $id, PDO::PARAM_INT);
+
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+
+        $result->execute();
+
+        return $result->fetch();
     }
 }
     

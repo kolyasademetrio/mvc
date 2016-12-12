@@ -26,15 +26,23 @@
             <div class="col-sm-9 padding-right">
                 <div class="features_items"><!--features_items-->
                     <h2 class="title text-center">Последние товары</h2>
+
                     <?php foreach ($latestProducts as $product) : ?>
                     <div class="col-sm-4">
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
                                     <img src="/template/images/home/product1.jpg" alt="" />
-                                    <h2>$56</h2>
-                                    <p>Easy Polo Black Edition</p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
+                                    <h2><?php echo $product['price'] ?> $</h2>
+                                    <p>
+                                        <a href="/product/<?php echo $product['id']; ?>">
+                                           <?php echo $product['name']; ?> 
+                                        </a>
+                                    </p>
+                                    <?php if($product['is_new']) :?>
+                                    <img class="new" src="template/images/home/new.png" alt="">
+                                    <?php endif; ?>
+                                    <a href="/product/<?php echo $product['id'] ?>/" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
                                 </div>
                             </div>
                         </div>
